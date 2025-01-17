@@ -1,14 +1,14 @@
-import { signIn } from "@/auth"
+import { signIn } from '@/auth';
 
 export default function Login() {
   return (
     <form
       action={async () => {
-        "use server"
-        await signIn("authentik", { redirectTo: '/' })
+        'use server';
+        await signIn('authentik', { redirectTo: '/' });
       }}
     >
-      <button type="submit">Signin with Authentik</button>
+      <button type='submit'>Signin with Authentik</button>
     </form>
-  )
+  );
 }
