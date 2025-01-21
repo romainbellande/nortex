@@ -9,7 +9,7 @@ import {
 import { relations } from 'drizzle-orm';
 import { id, createdAt, updatedAt } from './common';
 import { userBoards, cards } from './board';
-import { items } from './inventory';
+import { inventoryItems } from './inventory';
 import type { AdapterAccountType } from 'next-auth/adapters';
 
 export const users = pgTable('user', {
@@ -25,7 +25,7 @@ export const users = pgTable('user', {
 export const userRelations = relations(users, ({ many }) => ({
   boards: many(userBoards),
   assignedCards: many(cards),
-  assignedItems: many(items)
+  assignedItems: many(inventoryItems)
 }));
 
 export type User = typeof users.$inferSelect;

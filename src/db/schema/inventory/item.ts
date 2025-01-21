@@ -3,7 +3,7 @@ import { relations } from 'drizzle-orm';
 import { id, createdAt, updatedAt } from '../common';
 import { users } from '../user';
 
-export const items = pgTable('item', {
+export const inventoryItems = pgTable('inventory_item', {
   id,
   name: text('name').notNull(),
   reference: text('reference').notNull(),
@@ -15,11 +15,11 @@ export const items = pgTable('item', {
   updatedAt
 });
 
-export const itemRelations = relations(items, ({ one }) => ({
+export const itemRelations = relations(inventoryItems, ({ one }) => ({
   assignee: one(users, {
-    fields: [items.assigneeId],
+    fields: [inventoryItems.assigneeId],
     references: [users.id]
   })
 }));
 
-export type Item = typeof items.$inferSelect;
+export type Item = typeof inventoryItems.$inferSelect;

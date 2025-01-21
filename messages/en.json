@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "common": {},
+  "components": {
+    "layout": {
+      "app-sidebar": {
+
+      }
+    }
+  }
+}
