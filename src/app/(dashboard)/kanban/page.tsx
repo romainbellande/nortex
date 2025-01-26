@@ -1,3 +1,5 @@
-export default function KanbanPage() {
-  return <div>kanban</div>;
+import { KanbanPage } from '@/modules/kanban';
+
+export default function Page() {
+  return <KanbanPage />;
 }

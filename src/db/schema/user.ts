@@ -8,7 +8,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 import { id, createdAt, updatedAt } from './common';
-import { userBoards, cards } from './board';
+import { userBoards, boardTasks } from '@/modules/kanban/server/schema/index';
 import { inventoryItems } from './inventory';
 import type { AdapterAccountType } from 'next-auth/adapters';
 
@@ -24,7 +24,7 @@ export const users = pgTable('user', {
 
 export const userRelations = relations(users, ({ many }) => ({
   boards: many(userBoards),
-  assignedCards: many(cards),
+  assignedTasks: many(boardTasks),
   assignedItems: many(inventoryItems)
 }));
 

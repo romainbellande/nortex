@@ -1,8 +1,8 @@
 import { pgTable, text } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
-import { id, createdAt, updatedAt } from '../common';
-import { users } from '../user';
-import { lists } from './list';
+import { id, createdAt, updatedAt } from '@/db/schema/common';
+import { users } from '@/db/schema/user';
+import { boardColumns } from './board-column';
 
 export const boards = pgTable('board', {
   id,
@@ -25,7 +25,7 @@ export const userBoards = pgTable('user_board', {
 
 export const boardRelations = relations(boards, ({ many }) => ({
   users: many(userBoards),
-  lists: many(lists)
+  columns: many(boardColumns)
 }));
 
 export const userBoardRelations = relations(userBoards, ({ one }) => ({
@@ -39,5 +39,5 @@ export const userBoardRelations = relations(userBoards, ({ one }) => ({
   })
 }));
 
-export type Board = typeof boards.$inferSelect;
-export type UserBoard = typeof userBoards.$inferSelect;
+export type BoardEntity = typeof boards.$inferSelect;
+export type UserBoardEntity = typeof userBoards.$inferSelect;
