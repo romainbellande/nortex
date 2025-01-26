@@ -1,7 +1,6 @@
 import { auth } from '@/auth';
-import createMiddleware from 'next-intl/middleware';
-import { routing } from './i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
+import { middleware as intlMiddleware } from './lib/i18n';
 
 const publicPages: string[] = ['/login'];
 
@@ -9,12 +8,10 @@ const authPages: string[] = ['/login'];
 
 const testPathnameRegex = (pages: string[], pathName: string): boolean => {
   return RegExp(
-    `^(/(${routing.locales.join('|')}))?(${pages.flatMap((p) => (p === '/' ? ['', '/'] : p)).join('|')})/?$`,
+    `^(${pages.flatMap((p) => (p === '/' ? ['', '/'] : p)).join('|')})/?$`,
     'i'
   ).test(pathName);
 };
-
-const intlMiddleware = createMiddleware(routing);
 
 const authMiddleware = auth((req) => {
   const isAuthPage = testPathnameRegex(authPages, req.nextUrl.pathname);
@@ -49,13 +46,6 @@ const middleware = (req: NextRequest) => {
     return (authMiddleware as any)(req);
   }
 };
-
-// export default auth((req) => {
-//   if (!req.auth && req.nextUrl.pathname !== '/login') {
-//     const newUrl = new URL('/login', req.nextUrl.origin);
-//     return Response.redirect(newUrl);
-//   }
-// });
 
 export const config = {
   matcher: [

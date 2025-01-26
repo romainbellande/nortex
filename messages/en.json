@@ -1,11 +1,3 @@
 {
-  "pages": {},
-  "common": {},
-  "components": {
-    "layout": {
-      "app-sidebar": {
-
-      }
-    }
-  }
+    "$schema": "https://inlang.com/schema/inlang-message-format"
 }

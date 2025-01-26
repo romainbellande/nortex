@@ -1,3 +1,5 @@
+import { LanguageProvider } from '@inlang/paraglide-next';
+
 import type { Metadata } from 'next';
 import { Lato } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
@@ -24,20 +26,23 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+  const locale = 'en';
   return (
-    <html lang='en'>
-      <body
-        className={`${lato.className} antialiased`}
-        suppressHydrationWarning
-      >
-        <NextTopLoader showSpinner={false} />
-        <NuqsAdapter>
-          <Providers session={session}>
-            <Toaster />
-            {children}
-          </Providers>
-        </NuqsAdapter>
-      </body>
-    </html>
+    <LanguageProvider>
+      <html lang={locale}>
+        <body
+          className={`${lato.className} antialiased`}
+          suppressHydrationWarning
+        >
+          <NextTopLoader showSpinner={false} />
+          <NuqsAdapter>
+            <Providers session={session}>
+              <Toaster />
+              {children}
+            </Providers>
+          </NuqsAdapter>
+        </body>
+      </html>
+    </LanguageProvider>
   );
 }
